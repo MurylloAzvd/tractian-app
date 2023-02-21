@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Menu } from "antd";
+import { Drawer, Menu } from "antd";
 import { MenuProps, Grid, Button } from "antd";
 import {
   BankOutlined,
@@ -36,6 +36,7 @@ const items: MenuProps["items"] = [
 
 export const HeaderMenu = () => {
   const [current, setCurrent] = useState("companies");
+  const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
 
   const screens = useBreakpoint();
 
@@ -47,14 +48,31 @@ export const HeaderMenu = () => {
             setCurrent(e.key);
           }}
           selectedKeys={[current]}
-          mode="horizontal"
           items={items}
+          mode="horizontal"
           theme="dark"
         />
       ) : (
-        <Button type="default">
-          <MenuOutlined />
-        </Button>
+        <>
+          <Button onClick={() => setIsSideMenuOpen(true)}>
+            <MenuOutlined />
+          </Button>
+          <Drawer
+            open={isSideMenuOpen}
+            onClose={() => setIsSideMenuOpen(false)}
+            bodyStyle={{ padding: "24px 0" }}
+          >
+            <Menu
+              onClick={(e) => {
+                setCurrent(e.key);
+              }}
+              selectedKeys={[current]}
+              items={items}
+              mode="vertical"
+              theme="light"
+            />
+          </Drawer>
+        </>
       )}
     </>
   );
