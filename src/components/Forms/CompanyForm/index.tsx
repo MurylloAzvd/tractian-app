@@ -1,5 +1,6 @@
 import { Button, Form, Input } from "antd";
 import { CompanyFormData } from "../../../requests/Company";
+import "./index.css";
 
 interface CompanyFormProps {
   loading: boolean;

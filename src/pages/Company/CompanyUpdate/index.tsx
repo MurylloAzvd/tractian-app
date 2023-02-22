@@ -10,7 +10,6 @@ import {
   updateCompany,
 } from "../../../requests/Company";
 import { routePaths } from "../../../routes";
-import "./index.css";
 
 export const CompanyUpdate = () => {
   const [loading, setLoading] = useState(true);

@@ -5,7 +5,6 @@ import { CompanyForm } from "../../../components/Forms/CompanyForm";
 import { useMessage } from "../../../contexts/message";
 import { CompanyFormData, createCompany } from "../../../requests/Company";
 import { routePaths } from "../../../routes";
-import "./index.css";
 
 export const CompanyCreation = () => {
   const [loading, setLoading] = useState(false);
