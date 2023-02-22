@@ -1,36 +1,16 @@
 import { useCallback, useEffect, useState } from "react";
-import { Breadcrumb, Button, Col, Row, Space, Table } from "antd";
+import { Breadcrumb, Button, Col, Popconfirm, Row, Space, Table } from "antd";
 import { Link } from "react-router-dom";
 import { ColumnsType } from "antd/es/table";
 import { EditFilled, DeleteFilled, PlusOutlined } from "@ant-design/icons";
 import { useMessage } from "../../../contexts/message";
-import { Company, getCompanies } from "../../../requests/Company";
+import {
+  Company,
+  deleteCompany,
+  getCompanies,
+} from "../../../requests/Company";
 import { routePaths } from "../../../routes";
 import "./index.css";
-
-const columns: ColumnsType<Company> = [
-  {
-    title: "ID",
-    dataIndex: "id",
-  },
-  {
-    title: "Name",
-    dataIndex: "name",
-  },
-  {
-    width: 120,
-    render: (_, record) => (
-      <Space>
-        <Link
-          to={routePaths.company.update.replace(":id", record.id.toString())}
-        >
-          <Button icon={<EditFilled />} type="link" />
-        </Link>
-        <Button icon={<DeleteFilled />} type="link" danger />
-      </Space>
-    ),
-  },
-];
 
 export const CompaniesList = () => {
   const [loading, setLoading] = useState(true);
@@ -39,6 +19,7 @@ export const CompaniesList = () => {
 
   const fetchCompanies = useCallback(async () => {
     try {
+      setLoading(true);
       const data = await getCompanies();
       setCompanies(data);
     } catch (error) {
@@ -51,6 +32,48 @@ export const CompaniesList = () => {
   useEffect(() => {
     fetchCompanies();
   }, [fetchCompanies]);
+
+  const handleDeleteCompany = async (id: number) => {
+    try {
+      await deleteCompany(id);
+      message.success("Empresa deletada com sucesso");
+      fetchCompanies();
+    } catch (error) {
+      message.error("Erro ao deletar empresa");
+    }
+  };
+
+  const columns: ColumnsType<Company> = [
+    {
+      title: "ID",
+      dataIndex: "id",
+    },
+    {
+      title: "Name",
+      dataIndex: "name",
+    },
+    {
+      width: 120,
+      render: (_, record) => (
+        <Space>
+          <Link
+            to={routePaths.company.update.replace(":id", record.id.toString())}
+          >
+            <Button icon={<EditFilled />} type="link" />
+          </Link>
+          <Popconfirm
+            title="Deletar empresa"
+            description="Você tem certeza que deseja deletar essa empresa?"
+            onConfirm={() => handleDeleteCompany(record.id)}
+            okText="Sim"
+            cancelText="Não"
+          >
+            <Button icon={<DeleteFilled />} type="link" danger />
+          </Popconfirm>
+        </Space>
+      ),
+    },
+  ];
 
   return (
     <>

@@ -30,3 +30,8 @@ export const updateCompany = async (id: number, { name }: CompanyFormData) => {
   const response = await api.patch<Company>(`${basePath}/${id}`, { name });
   return response.data;
 };
+
+export const deleteCompany = async (id: number) => {
+  const response = await api.delete<Company>(`${basePath}/${id}`);
+  return response.data;
+};
