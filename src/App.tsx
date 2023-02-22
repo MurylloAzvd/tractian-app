@@ -1,5 +1,6 @@
 import { BrowserRouter } from "react-router-dom";
 import { Layout } from "antd";
+import { MessageProvider } from "./contexts/message";
 import { HeaderMenu } from "./components/HeaderMenu";
 import { Router } from "./routes";
 import LogoTractian from "./assets/logo-tractian.svg";
@@ -17,7 +18,9 @@ function App() {
           <HeaderMenu />
         </Header>
         <Content className="content">
-          <Router />
+          <MessageProvider>
+            <Router />
+          </MessageProvider>
         </Content>
       </Layout>
     </BrowserRouter>

@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
-import { Breadcrumb, Button, Col, message, Row, Space, Table } from "antd";
+import { Breadcrumb, Button, Col, Row, Space, Table } from "antd";
 import { Link } from "react-router-dom";
 import { ColumnsType } from "antd/es/table";
 import { EditFilled, DeleteFilled, PlusOutlined } from "@ant-design/icons";
+import { useMessage } from "../../../contexts/message";
 import { Company, getCompanies } from "../../../requests/Company";
 import { routePaths } from "../../../routes";
 import "./index.css";
@@ -30,18 +31,18 @@ const columns: ColumnsType<Company> = [
 export const CompaniesList = () => {
   const [loading, setLoading] = useState(true);
   const [companies, setCompanies] = useState<Company[]>([]);
-  const [messageApi, contextHolder] = message.useMessage();
+  const { message } = useMessage();
 
   const fetchCompanies = useCallback(async () => {
     try {
       const data = await getCompanies();
       setCompanies(data);
     } catch (error) {
-      messageApi.error("Erro ao carregar a lista de empresas");
+      message.error("Erro ao carregar a lista de empresas");
     } finally {
       setLoading(false);
     }
-  }, [messageApi]);
+  }, [message]);
 
   useEffect(() => {
     fetchCompanies();
@@ -70,7 +71,6 @@ export const CompaniesList = () => {
         rowKey="id"
         loading={loading}
       />
-      {contextHolder}
     </>
   );
 };
