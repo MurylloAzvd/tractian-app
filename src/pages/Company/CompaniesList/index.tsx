@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
-import { Breadcrumb, Button, Col, Popconfirm, Row, Space, Table } from "antd";
 import { Link } from "react-router-dom";
+import { Breadcrumb, Button, Col, Popconfirm, Row, Space, Table } from "antd";
 import { ColumnsType } from "antd/es/table";
 import { EditFilled, DeleteFilled, PlusOutlined } from "@ant-design/icons";
 import { useMessage } from "../../../contexts/message";
@@ -49,7 +49,7 @@ export const CompaniesList = () => {
       dataIndex: "id",
     },
     {
-      title: "Name",
+      title: "Nome",
       dataIndex: "name",
     },
     {

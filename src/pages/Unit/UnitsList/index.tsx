@@ -1,3 +1,103 @@
+import { useCallback, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { Breadcrumb, Button, Col, Popconfirm, Row, Space, Table } from "antd";
+import { ColumnsType } from "antd/es/table";
+import { EditFilled, DeleteFilled, PlusOutlined } from "@ant-design/icons";
+import { useMessage } from "../../../contexts/message";
+import { deleteUnit, getUnits, Unit } from "../../../requests/Unit";
+import { routePaths } from "../../../routes";
+import "./index.css";
+
 export const UnitsList = () => {
-  return <h1>Units</h1>;
+  const [loading, setLoading] = useState(true);
+  const [units, setUnits] = useState<Unit[]>([]);
+  const { message } = useMessage();
+
+  const fetchUnits = useCallback(async () => {
+    try {
+      setLoading(true);
+      const data = await getUnits();
+      setUnits(data);
+    } catch (error) {
+      message.error("Erro ao carregar a lista de unidades");
+    } finally {
+      setLoading(false);
+    }
+  }, [message]);
+
+  useEffect(() => {
+    fetchUnits();
+  }, [fetchUnits]);
+
+  const handleDeleteUnit = async (id: number) => {
+    try {
+      await deleteUnit(id);
+      message.success("Unidade deletada com sucesso");
+      fetchUnits();
+    } catch (error) {
+      message.error("Erro ao deletar unidade");
+    }
+  };
+
+  const columns: ColumnsType<Unit> = [
+    {
+      title: "ID",
+      dataIndex: "id",
+    },
+    {
+      title: "ID da empresa",
+      dataIndex: "companyId",
+    },
+    {
+      title: "Nome",
+      dataIndex: "name",
+    },
+    {
+      width: 120,
+      render: (_, record) => (
+        <Space>
+          <Link
+            to={routePaths.unit.update.replace(":id", record.id.toString())}
+          >
+            <Button icon={<EditFilled />} type="link" />
+          </Link>
+          <Popconfirm
+            title="Deletar unidade"
+            description="Você tem certeza que deseja deletar essa unidade?"
+            onConfirm={() => handleDeleteUnit(record.id)}
+            okText="Sim"
+            cancelText="Não"
+          >
+            <Button icon={<DeleteFilled />} type="link" danger />
+          </Popconfirm>
+        </Space>
+      ),
+    },
+  ];
+
+  return (
+    <>
+      <Row align="middle" justify="space-between">
+        <Col>
+          <Breadcrumb>
+            <Breadcrumb.Item>Unidades</Breadcrumb.Item>
+          </Breadcrumb>
+        </Col>
+        <Col>
+          <Link to={routePaths.unit.creation}>
+            <Button type="primary" icon={<PlusOutlined />}>
+              Criar unidade
+            </Button>
+          </Link>
+        </Col>
+      </Row>
+      <Table
+        dataSource={units}
+        columns={columns}
+        className="units-table"
+        rowKey="id"
+        loading={loading}
+      />
+    </>
+  );
 };
