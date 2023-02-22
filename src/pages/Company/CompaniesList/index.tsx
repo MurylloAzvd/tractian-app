@@ -21,7 +21,11 @@ const columns: ColumnsType<Company> = [
     width: 120,
     render: (_, record) => (
       <Space>
-        <Button icon={<EditFilled />} type="link" />
+        <Link
+          to={routePaths.company.update.replace(":id", record.id.toString())}
+        >
+          <Button icon={<EditFilled />} type="link" />
+        </Link>
         <Button icon={<DeleteFilled />} type="link" danger />
       </Space>
     ),
