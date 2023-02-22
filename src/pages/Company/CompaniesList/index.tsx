@@ -67,6 +67,7 @@ export const CompaniesList = () => {
             onConfirm={() => handleDeleteCompany(record.id)}
             okText="Sim"
             cancelText="Não"
+            placement="topRight"
           >
             <Button icon={<DeleteFilled />} type="link" danger />
           </Popconfirm>
