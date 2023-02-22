@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Drawer, Menu } from "antd";
-import { MenuProps, Grid, Button } from "antd";
+import { useLocation, useNavigate } from "react-router-dom";
+import { MenuProps, Grid, Button, Drawer, Menu } from "antd";
 import {
   BankOutlined,
   PushpinOutlined,
@@ -14,43 +14,45 @@ const { useBreakpoint } = Grid;
 const items: MenuProps["items"] = [
   {
     label: "Empresas",
-    key: "companies",
+    key: "empresas",
     icon: <BankOutlined />,
   },
   {
     label: "Unidades",
-    key: "units",
+    key: "unidades",
     icon: <PushpinOutlined />,
   },
   {
     label: "Usuários",
-    key: "users",
+    key: "usuarios",
     icon: <UserOutlined />,
   },
   {
     label: "Ativos",
-    key: "assets",
+    key: "ativos",
     icon: <SettingOutlined />,
   },
 ];
 
 export const HeaderMenu = () => {
-  const [current, setCurrent] = useState("companies");
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
-
+  const navigate = useNavigate();
   const screens = useBreakpoint();
+  const { pathname } = useLocation();
+
+  const mainPath = pathname.split("/")[1];
 
   return (
     <>
       {screens.lg ? (
         <Menu
-          onClick={(e) => {
-            setCurrent(e.key);
-          }}
-          selectedKeys={[current]}
+          selectedKeys={[mainPath]}
           items={items}
           mode="horizontal"
           theme="dark"
+          onClick={(e) => {
+            navigate(e.key);
+          }}
         />
       ) : (
         <>
@@ -63,13 +65,13 @@ export const HeaderMenu = () => {
             bodyStyle={{ padding: "24px 0" }}
           >
             <Menu
-              onClick={(e) => {
-                setCurrent(e.key);
-              }}
-              selectedKeys={[current]}
+              selectedKeys={[mainPath]}
               items={items}
               mode="vertical"
               theme="light"
+              onClick={(e) => {
+                navigate(e.key);
+              }}
             />
           </Drawer>
         </>
