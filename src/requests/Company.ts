@@ -21,13 +21,13 @@ export const getCompany = async (id: number) => {
   return response.data;
 };
 
-export const createCompany = async ({ name }: CompanyFormData) => {
-  const response = await api.post<Company>(basePath, { name });
+export const createCompany = async (data: CompanyFormData) => {
+  const response = await api.post<Company>(basePath, data);
   return response.data;
 };
 
-export const updateCompany = async (id: number, { name }: CompanyFormData) => {
-  const response = await api.patch<Company>(`${basePath}/${id}`, { name });
+export const updateCompany = async (id: number, data: CompanyFormData) => {
+  const response = await api.patch<Company>(`${basePath}/${id}`, data);
   return response.data;
 };
 
