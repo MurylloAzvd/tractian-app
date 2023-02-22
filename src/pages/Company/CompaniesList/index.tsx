@@ -1,33 +1,11 @@
-import { Breadcrumb, Button, Col, Row, Space, Table } from "antd";
+import { useCallback, useEffect, useState } from "react";
+import { Breadcrumb, Button, Col, message, Row, Space, Table } from "antd";
 import { ColumnsType } from "antd/es/table";
 import { EditFilled, DeleteFilled, PlusOutlined } from "@ant-design/icons";
+import { Company, getCompanies } from "../../../requests/Company";
 import "./index.css";
 
-interface DataType {
-  id: number;
-  name: string;
-}
-
-const dataSource: DataType[] = [
-  {
-    id: 1,
-    name: "The Test Company Mike",
-  },
-  {
-    id: 2,
-    name: "The Test Company John",
-  },
-  {
-    id: 3,
-    name: "The Test Company Mike",
-  },
-  {
-    id: 4,
-    name: "The Test Company John",
-  },
-];
-
-const columns: ColumnsType<DataType> = [
+const columns: ColumnsType<Company> = [
   {
     title: "ID",
     dataIndex: "id",
@@ -48,6 +26,25 @@ const columns: ColumnsType<DataType> = [
 ];
 
 export const CompaniesList = () => {
+  const [loading, setLoading] = useState(true);
+  const [companies, setCompanies] = useState<Company[]>([]);
+  const [messageApi, contextHolder] = message.useMessage();
+
+  const fetchCompanies = useCallback(async () => {
+    try {
+      const data = await getCompanies();
+      setCompanies(data);
+    } catch (error) {
+      messageApi.error("Erro ao carregar a lista de empresas");
+    } finally {
+      setLoading(false);
+    }
+  }, [messageApi]);
+
+  useEffect(() => {
+    fetchCompanies();
+  }, [fetchCompanies]);
+
   return (
     <>
       <Row align="middle" justify="space-between">
@@ -63,11 +60,13 @@ export const CompaniesList = () => {
         </Col>
       </Row>
       <Table
-        dataSource={dataSource}
+        dataSource={companies}
         columns={columns}
         className="companies-table"
         rowKey="id"
+        loading={loading}
       />
+      {contextHolder}
     </>
   );
 };
