@@ -1,6 +1,7 @@
-import { Breadcrumb, Button, Form, Input } from "antd";
+import { Breadcrumb } from "antd";
 import { useCallback, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { CompanyForm } from "../../../components/Forms/CompanyForm";
 import { useMessage } from "../../../contexts/message";
 import {
   Company,
@@ -56,32 +57,13 @@ export const CompanyUpdate = () => {
         </Breadcrumb.Item>
         <Breadcrumb.Item>Editar</Breadcrumb.Item>
       </Breadcrumb>
-      <Form
-        onFinish={(values) => {
-          saveCompany(values);
-        }}
-        className="company-form"
-        disabled={loading}
-        initialValues={company}
-      >
-        <Form.Item
-          label="Nome"
-          name="name"
-          rules={[{ required: true, message: "Campo obrigatório" }]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="company-form-button"
-            loading={loading}
-          >
-            Salvar
-          </Button>
-        </Form.Item>
-      </Form>
+      {company && (
+        <CompanyForm
+          loading={loading}
+          saveCompany={saveCompany}
+          initialValues={company}
+        />
+      )}
     </>
   );
 };
