@@ -1,8 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
 import { Breadcrumb, Button, Col, message, Row, Space, Table } from "antd";
+import { Link } from "react-router-dom";
 import { ColumnsType } from "antd/es/table";
 import { EditFilled, DeleteFilled, PlusOutlined } from "@ant-design/icons";
 import { Company, getCompanies } from "../../../requests/Company";
+import { routerPaths } from "../../../routes";
 import "./index.css";
 
 const columns: ColumnsType<Company> = [
@@ -54,9 +56,11 @@ export const CompaniesList = () => {
           </Breadcrumb>
         </Col>
         <Col>
-          <Button type="primary" icon={<PlusOutlined />}>
-            Criar empresa
-          </Button>
+          <Link to={routerPaths.company.creation}>
+            <Button type="primary" icon={<PlusOutlined />}>
+              Criar empresa
+            </Button>
+          </Link>
         </Col>
       </Row>
       <Table

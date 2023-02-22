@@ -1,9 +1,9 @@
 import { Layout } from "antd";
 import { HeaderMenu } from "./components/HeaderMenu";
+import { Routes } from "./routes";
 import LogoTractian from "./assets/logo-tractian.svg";
 import "antd/dist/reset.css";
 import "./App.css";
-import { CompaniesList } from "./pages/Company/CompaniesList";
 
 const { Header, Content } = Layout;
 
@@ -15,7 +15,7 @@ function App() {
         <HeaderMenu />
       </Header>
       <Content className="content">
-        <CompaniesList />
+        <Routes />
       </Content>
     </Layout>
   );
