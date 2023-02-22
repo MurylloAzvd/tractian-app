@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Breadcrumb, Button, Col, Popconfirm, Row, Space, Table } from "antd";
+import { Button, Popconfirm, Space, Table } from "antd";
 import { ColumnsType } from "antd/es/table";
-import { EditFilled, DeleteFilled, PlusOutlined } from "@ant-design/icons";
+import { EditFilled, DeleteFilled } from "@ant-design/icons";
 import { useMessage } from "../../../contexts/message";
 import { deleteUnit, getUnits, Unit } from "../../../requests/Unit";
 import { routePaths } from "../../../routes";
-import "./index.css";
+import { ListPageHeader } from "../../../components/ListPageHeader";
 
 export const UnitsList = () => {
   const [loading, setLoading] = useState(true);
@@ -77,24 +77,16 @@ export const UnitsList = () => {
 
   return (
     <>
-      <Row align="middle" justify="space-between">
-        <Col>
-          <Breadcrumb>
-            <Breadcrumb.Item>Unidades</Breadcrumb.Item>
-          </Breadcrumb>
-        </Col>
-        <Col>
-          <Link to={routePaths.unit.creation}>
-            <Button type="primary" icon={<PlusOutlined />}>
-              Criar unidade
-            </Button>
-          </Link>
-        </Col>
-      </Row>
+      <ListPageHeader
+        title="Unidades"
+        addButton={{
+          label: "Criar unidade",
+          routePath: routePaths.unit.creation,
+        }}
+      />
       <Table
         dataSource={units}
         columns={columns}
-        className="units-table"
         rowKey="id"
         loading={loading}
       />

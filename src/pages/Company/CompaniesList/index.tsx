@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Breadcrumb, Button, Col, Popconfirm, Row, Space, Table } from "antd";
+import { Button, Popconfirm, Space, Table } from "antd";
 import { ColumnsType } from "antd/es/table";
-import { EditFilled, DeleteFilled, PlusOutlined } from "@ant-design/icons";
+import { EditFilled, DeleteFilled } from "@ant-design/icons";
 import { useMessage } from "../../../contexts/message";
 import {
   Company,
@@ -10,7 +10,7 @@ import {
   getCompanies,
 } from "../../../requests/Company";
 import { routePaths } from "../../../routes";
-import "./index.css";
+import { ListPageHeader } from "../../../components/ListPageHeader";
 
 export const CompaniesList = () => {
   const [loading, setLoading] = useState(true);
@@ -77,24 +77,16 @@ export const CompaniesList = () => {
 
   return (
     <>
-      <Row align="middle" justify="space-between">
-        <Col>
-          <Breadcrumb>
-            <Breadcrumb.Item>Empresas</Breadcrumb.Item>
-          </Breadcrumb>
-        </Col>
-        <Col>
-          <Link to={routePaths.company.creation}>
-            <Button type="primary" icon={<PlusOutlined />}>
-              Criar empresa
-            </Button>
-          </Link>
-        </Col>
-      </Row>
+      <ListPageHeader
+        title="Empresas"
+        addButton={{
+          label: "Criar empresa",
+          routePath: routePaths.company.creation,
+        }}
+      />
       <Table
         dataSource={companies}
         columns={columns}
-        className="companies-table"
         rowKey="id"
         loading={loading}
       />
