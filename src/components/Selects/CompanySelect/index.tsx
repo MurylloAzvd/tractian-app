@@ -5,9 +5,10 @@ import { Company, getCompanies } from "../../../requests/Company";
 
 interface CompanySelectProps {
   onChange: (value: number) => void;
+  value: number;
 }
 
-export const CompanySelect = ({ onChange }: CompanySelectProps) => {
+export const CompanySelect = ({ onChange, value }: CompanySelectProps) => {
   const [loading, setLoading] = useState(true);
   const [companies, setCompanies] = useState<Company[]>([]);
   const { message } = useMessage();
@@ -33,5 +34,12 @@ export const CompanySelect = ({ onChange }: CompanySelectProps) => {
     label: company.name,
   }));
 
-  return <Select options={options} onChange={onChange} loading={loading} />;
+  return (
+    <Select
+      value={value}
+      options={options}
+      onChange={onChange}
+      loading={loading}
+    />
+  );
 };

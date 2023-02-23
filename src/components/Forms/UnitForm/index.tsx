@@ -40,6 +40,7 @@ export const UnitForm = ({
       >
         <CompanySelect
           onChange={(value) => form.setFieldsValue({ companyId: value })}
+          value={form.getFieldsValue().companyId}
         />
       </Form.Item>
       <Form.Item>
