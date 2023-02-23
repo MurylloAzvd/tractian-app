@@ -28,6 +28,8 @@ export enum AssetStatus {
   inAlert = "inAlert",
   inOperation = "inOperation",
   inDowntime = "inDowntime",
+  unplannedStop = "unplannedStop",
+  plannedStop = "plannedStop",
 }
 
 interface AssetSpecifications {
@@ -42,7 +44,7 @@ interface AssetMetrics {
   totalUptime: number;
 }
 
-interface HealthHistoryRecord {
+export interface HealthHistoryRecord {
   status: AssetStatus;
   timestamp: string;
 }
