@@ -36,7 +36,7 @@ export const CompanySelect = ({ onChange, value }: CompanySelectProps) => {
 
   return (
     <Select
-      value={value}
+      value={loading ? undefined : value}
       options={options}
       onChange={onChange}
       loading={loading}
