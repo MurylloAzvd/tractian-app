@@ -10,18 +10,16 @@ interface AssetInfoProps {
 
 export const AssetInfo = ({ asset }: AssetInfoProps) => {
   return (
-    <div className="asset-info">
-      <Row>
+    <Row className="asset-info" gutter={[24, 24]}>
+      <Col span={24}>
         <AssetDescriptions asset={asset} />
-      </Row>
-      <Row gutter={20}>
-        <Col span={8}>
-          <Image src={asset.image} />
-        </Col>
-        <Col span={16}>
-          <HealthHistoryChart asset={asset} />
-        </Col>
-      </Row>
-    </div>
+      </Col>
+      <Col xs={24} md={8}>
+        <Image src={asset.image} />
+      </Col>
+      <Col xs={24} md={16}>
+        <HealthHistoryChart asset={asset} />
+      </Col>
+    </Row>
   );
 };
