@@ -47,6 +47,7 @@ export const UnitsList = () => {
     {
       title: "ID da empresa",
       dataIndex: "companyId",
+      responsive: ["md"],
     },
     {
       title: "Nome",

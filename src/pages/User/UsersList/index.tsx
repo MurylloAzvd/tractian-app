@@ -47,10 +47,12 @@ export const UsersList = () => {
     {
       title: "ID da empresa",
       dataIndex: "companyId",
+      responsive: ["md"],
     },
     {
       title: "ID da unidade",
       dataIndex: "unitId",
+      responsive: ["md"],
     },
     {
       title: "Nome",
@@ -59,6 +61,7 @@ export const UsersList = () => {
     {
       title: "E-mail",
       dataIndex: "email",
+      responsive: ["sm"],
     },
     {
       width: 120,

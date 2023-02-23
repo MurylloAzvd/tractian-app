@@ -48,10 +48,12 @@ export const AssetsList = () => {
     {
       title: "ID da empresa",
       dataIndex: "companyId",
+      responsive: ["md"],
     },
     {
       title: "ID da unidade",
       dataIndex: "unitId",
+      responsive: ["md"],
     },
     {
       title: "Nome",
@@ -60,23 +62,26 @@ export const AssetsList = () => {
     {
       title: "Modelo",
       dataIndex: "model",
+      responsive: ["sm"],
     },
     {
       title: "Saúde",
       dataIndex: "healthscore",
       render: (value) => <span>{value}%</span>,
+      responsive: ["sm"],
     },
     {
       title: "Status",
       dataIndex: "status",
       render: (value) => <AssetStatusTag status={value} />,
+      responsive: ["sm"],
     },
     {
       width: 120,
       render: (_, record) => (
         <Space>
           <Link
-            to={routePaths.user.update.replace(":id", record.id.toString())}
+            to={routePaths.asset.update.replace(":id", record.id.toString())}
           >
             <Button icon={<EditFilled />} type="link" />
           </Link>
@@ -100,8 +105,8 @@ export const AssetsList = () => {
       <ListPageHeader
         title="Ativos"
         addButton={{
-          label: "Criar usuário",
-          routePath: routePaths.user.creation,
+          label: "Criar ativo",
+          routePath: routePaths.asset.creation,
         }}
       />
       <Table
