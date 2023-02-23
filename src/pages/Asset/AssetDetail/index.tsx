@@ -1,4 +1,4 @@
-import { Breadcrumb } from "antd";
+import { Breadcrumb, Row, Spin } from "antd";
 import { useCallback, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useMessage } from "../../../contexts/message";
@@ -29,8 +29,6 @@ export const AssetDetail = () => {
     fetchAsset();
   }, [fetchAsset]);
 
-  console.log(loading, asset);
-
   return (
     <>
       <Breadcrumb>
@@ -39,6 +37,11 @@ export const AssetDetail = () => {
         </Breadcrumb.Item>
         <Breadcrumb.Item>Detalhes</Breadcrumb.Item>
       </Breadcrumb>
+      {loading && (
+        <Row justify="center">
+          <Spin size="large" />
+        </Row>
+      )}
       {asset && <AssetInfo asset={asset} />}
     </>
   );

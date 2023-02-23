@@ -1,3 +1,4 @@
+import React from "react";
 import { Descriptions } from "antd";
 import { AssetStatusTag } from "../../../../../components/AssetStatusTag";
 import { Asset } from "../../../../../requests/Asset";
@@ -19,11 +20,11 @@ export const AssetDescriptions = ({
         {healthscore}%
       </Descriptions.Item>
       <Descriptions.Item label="Sensores">
-        {sensors.map((sensor) => (
-          <>
+        {sensors.map((sensor, index) => (
+          <React.Fragment key={index}>
             <span>{sensor}</span>
             <br />
-          </>
+          </React.Fragment>
         ))}
       </Descriptions.Item>
       <Descriptions.Item label="Especificações">
