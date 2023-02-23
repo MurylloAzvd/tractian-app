@@ -86,8 +86,8 @@ export const AssetsList = () => {
             <Button icon={<EditFilled />} type="link" />
           </Link>
           <Popconfirm
-            title="Deletar usuário"
-            description="Você tem certeza que deseja deletar esse usuário?"
+            title="Deletar ativo"
+            description="Você tem certeza que deseja deletar esse ativo?"
             onConfirm={() => handleDeleteAsset(record.id)}
             okText="Sim"
             cancelText="Não"
