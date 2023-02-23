@@ -20,6 +20,7 @@ export const CompanyForm = ({
       }}
       className="company-form"
       initialValues={initialValues}
+      layout="vertical"
     >
       <Form.Item
         label="Nome"

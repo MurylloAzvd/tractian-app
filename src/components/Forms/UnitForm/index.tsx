@@ -24,6 +24,7 @@ export const UnitForm = ({
       className="unit-form"
       initialValues={initialValues}
       form={form}
+      layout="vertical"
     >
       <Form.Item
         label="Nome"
