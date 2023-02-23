@@ -1,12 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { Button, Popconfirm, Space, Table } from "antd";
+import { Table } from "antd";
 import { ColumnsType } from "antd/es/table";
-import { EditFilled, DeleteFilled } from "@ant-design/icons";
 import { useMessage } from "../../../contexts/message";
 import { routePaths } from "../../../routes";
 import { ListPageHeader } from "../../../components/ListPageHeader";
 import { deleteUser, getUsers, User } from "../../../requests/User";
+import { TableActionButtons } from "../../../components/TableActionButtons";
 
 export const UsersList = () => {
   const [loading, setLoading] = useState(true);
@@ -66,23 +65,17 @@ export const UsersList = () => {
     {
       width: 120,
       render: (_, record) => (
-        <Space>
-          <Link
-            to={routePaths.user.update.replace(":id", record.id.toString())}
-          >
-            <Button icon={<EditFilled />} type="link" />
-          </Link>
-          <Popconfirm
-            title="Deletar usuário"
-            description="Você tem certeza que deseja deletar esse usuário?"
-            onConfirm={() => handleDeleteUser(record.id)}
-            okText="Sim"
-            cancelText="Não"
-            placement="topRight"
-          >
-            <Button icon={<DeleteFilled />} type="link" danger />
-          </Popconfirm>
-        </Space>
+        <TableActionButtons
+          updateRoutePath={routePaths.user.update.replace(
+            ":id",
+            record.id.toString()
+          )}
+          deleteButton={{
+            title: "Deletar usuário",
+            description: "Você tem certeza que deseja deletar esse usuário?",
+            onConfirm: () => handleDeleteUser(record.id),
+          }}
+        />
       ),
     },
   ];

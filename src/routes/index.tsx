@@ -11,6 +11,7 @@ import { UserUpdate } from "../pages/User/UserUpdate";
 import { AssetsList } from "../pages/Asset/AssetsList";
 import { AssetCreation } from "../pages/Asset/AsssetCreation";
 import { AssetUpdate } from "../pages/Asset/AssetUpdate";
+import { AssetDetail } from "../pages/Asset/AssetDetail";
 
 export const routePaths = {
   company: {
@@ -32,6 +33,7 @@ export const routePaths = {
     list: "/ativos",
     creation: "/ativos/criar",
     update: "/ativos/editar/:id",
+    detail: "/ativos/detalhes/:id",
   },
 };
 
@@ -49,6 +51,7 @@ export const Router = () => (
     <Route path={routePaths.asset.list} element={<AssetsList />} />
     <Route path={routePaths.asset.creation} element={<AssetCreation />} />
     <Route path={routePaths.asset.update} element={<AssetUpdate />} />
+    <Route path={routePaths.asset.detail} element={<AssetDetail />} />
     <Route path="*" element={<span>development...</span>} />
   </Routes>
 );

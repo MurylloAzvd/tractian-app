@@ -1,8 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { Button, Popconfirm, Space, Table } from "antd";
+import { Table } from "antd";
 import { ColumnsType } from "antd/es/table";
-import { EditFilled, DeleteFilled } from "@ant-design/icons";
 import { useMessage } from "../../../contexts/message";
 import {
   Company,
@@ -11,6 +9,7 @@ import {
 } from "../../../requests/Company";
 import { routePaths } from "../../../routes";
 import { ListPageHeader } from "../../../components/ListPageHeader";
+import { TableActionButtons } from "../../../components/TableActionButtons";
 
 export const CompaniesList = () => {
   const [loading, setLoading] = useState(true);
@@ -55,23 +54,17 @@ export const CompaniesList = () => {
     {
       width: 120,
       render: (_, record) => (
-        <Space>
-          <Link
-            to={routePaths.company.update.replace(":id", record.id.toString())}
-          >
-            <Button icon={<EditFilled />} type="link" />
-          </Link>
-          <Popconfirm
-            title="Deletar empresa"
-            description="Você tem certeza que deseja deletar essa empresa?"
-            onConfirm={() => handleDeleteCompany(record.id)}
-            okText="Sim"
-            cancelText="Não"
-            placement="topRight"
-          >
-            <Button icon={<DeleteFilled />} type="link" danger />
-          </Popconfirm>
-        </Space>
+        <TableActionButtons
+          updateRoutePath={routePaths.company.update.replace(
+            ":id",
+            record.id.toString()
+          )}
+          deleteButton={{
+            title: "Deletar empresa",
+            description: "Você tem certeza que deseja deletar essa empresa?",
+            onConfirm: () => handleDeleteCompany(record.id),
+          }}
+        />
       ),
     },
   ];

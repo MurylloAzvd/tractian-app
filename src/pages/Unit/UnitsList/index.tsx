@@ -1,12 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { Button, Popconfirm, Space, Table } from "antd";
+import { Table } from "antd";
 import { ColumnsType } from "antd/es/table";
-import { EditFilled, DeleteFilled } from "@ant-design/icons";
 import { useMessage } from "../../../contexts/message";
 import { deleteUnit, getUnits, Unit } from "../../../requests/Unit";
 import { routePaths } from "../../../routes";
 import { ListPageHeader } from "../../../components/ListPageHeader";
+import { TableActionButtons } from "../../../components/TableActionButtons";
 
 export const UnitsList = () => {
   const [loading, setLoading] = useState(true);
@@ -56,23 +55,17 @@ export const UnitsList = () => {
     {
       width: 120,
       render: (_, record) => (
-        <Space>
-          <Link
-            to={routePaths.unit.update.replace(":id", record.id.toString())}
-          >
-            <Button icon={<EditFilled />} type="link" />
-          </Link>
-          <Popconfirm
-            title="Deletar unidade"
-            description="Você tem certeza que deseja deletar essa unidade?"
-            onConfirm={() => handleDeleteUnit(record.id)}
-            okText="Sim"
-            cancelText="Não"
-            placement="topRight"
-          >
-            <Button icon={<DeleteFilled />} type="link" danger />
-          </Popconfirm>
-        </Space>
+        <TableActionButtons
+          updateRoutePath={routePaths.unit.update.replace(
+            ":id",
+            record.id.toString()
+          )}
+          deleteButton={{
+            title: "Deletar unidade",
+            description: "Você tem certeza que deseja deletar essa unidade?",
+            onConfirm: () => handleDeleteUnit(record.id),
+          }}
+        />
       ),
     },
   ];

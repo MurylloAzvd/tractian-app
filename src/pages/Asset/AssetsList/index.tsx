@@ -1,13 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { Button, Popconfirm, Space, Table } from "antd";
+import { Table } from "antd";
 import { ColumnsType } from "antd/es/table";
-import { EditFilled, DeleteFilled } from "@ant-design/icons";
 import { useMessage } from "../../../contexts/message";
 import { routePaths } from "../../../routes";
 import { ListPageHeader } from "../../../components/ListPageHeader";
 import { Asset, deleteAsset, getAssets } from "../../../requests/Asset";
 import { AssetStatusTag } from "../../../components/AssetStatusTag";
+import { TableActionButtons } from "../../../components/TableActionButtons";
 
 export const AssetsList = () => {
   const [loading, setLoading] = useState(true);
@@ -79,23 +78,21 @@ export const AssetsList = () => {
     {
       width: 120,
       render: (_, record) => (
-        <Space>
-          <Link
-            to={routePaths.asset.update.replace(":id", record.id.toString())}
-          >
-            <Button icon={<EditFilled />} type="link" />
-          </Link>
-          <Popconfirm
-            title="Deletar ativo"
-            description="Você tem certeza que deseja deletar esse ativo?"
-            onConfirm={() => handleDeleteAsset(record.id)}
-            okText="Sim"
-            cancelText="Não"
-            placement="topRight"
-          >
-            <Button icon={<DeleteFilled />} type="link" danger />
-          </Popconfirm>
-        </Space>
+        <TableActionButtons
+          detailRoutePath={routePaths.asset.detail.replace(
+            ":id",
+            record.id.toString()
+          )}
+          updateRoutePath={routePaths.asset.update.replace(
+            ":id",
+            record.id.toString()
+          )}
+          deleteButton={{
+            title: "Deletar ativo",
+            description: "Você tem certeza que deseja deletar esse ativo?",
+            onConfirm: () => handleDeleteAsset(record.id),
+          }}
+        />
       ),
     },
   ];
