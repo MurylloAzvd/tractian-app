@@ -9,6 +9,7 @@ import { UsersList } from "../pages/User/UsersList";
 import { UserCreation } from "../pages/User/UserCreation";
 import { UserUpdate } from "../pages/User/UserUpdate";
 import { AssetsList } from "../pages/Asset/AssetsList";
+import { AssetCreation } from "../pages/Asset/AsssetCreation";
 
 export const routePaths = {
   company: {
@@ -45,7 +46,7 @@ export const Router = () => (
     <Route path={routePaths.user.creation} element={<UserCreation />} />
     <Route path={routePaths.user.update} element={<UserUpdate />} />
     <Route path={routePaths.asset.list} element={<AssetsList />} />
-    <Route path={routePaths.asset.creation} element={<UserCreation />} />
+    <Route path={routePaths.asset.creation} element={<AssetCreation />} />
     <Route path={routePaths.asset.update} element={<UserUpdate />} />
     <Route path="*" element={<span>development...</span>} />
   </Routes>

@@ -22,7 +22,6 @@ export interface AssetFormData {
   name: string;
   model: string;
   image: string;
-  sensors: string[];
   specifications: AssetSpecifications;
 }
 
