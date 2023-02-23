@@ -57,7 +57,7 @@ export const UsersList = () => {
       dataIndex: "name",
     },
     {
-      title: "Email",
+      title: "E-mail",
       dataIndex: "email",
     },
     {
