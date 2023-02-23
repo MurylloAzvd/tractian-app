@@ -5,6 +5,7 @@ import { CompanyUpdate } from "../pages/Company/CompanyUpdate";
 import { UnitsList } from "../pages/Unit/UnitsList";
 import { UnitCreation } from "../pages/Unit/UnitCreation";
 import { UnitUpdate } from "../pages/Unit/UnitUpdate";
+import { UsersList } from "../pages/User/UsersList";
 
 export const routePaths = {
   company: {
@@ -17,6 +18,11 @@ export const routePaths = {
     creation: "/unidades/criar",
     update: "/unidades/editar/:id",
   },
+  user: {
+    list: "/usuarios",
+    creation: "/usuarios/criar",
+    update: "/usuarios/editar/:id",
+  },
 };
 
 export const Router = () => (
@@ -27,6 +33,9 @@ export const Router = () => (
     <Route path={routePaths.unit.list} element={<UnitsList />} />
     <Route path={routePaths.unit.creation} element={<UnitCreation />} />
     <Route path={routePaths.unit.update} element={<UnitUpdate />} />
+    <Route path={routePaths.user.list} element={<UsersList />} />
+    <Route path={routePaths.user.creation} element={<UnitCreation />} />
+    <Route path={routePaths.user.update} element={<UnitUpdate />} />
     <Route path="*" element={<span>development...</span>} />
   </Routes>
 );
