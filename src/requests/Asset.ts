@@ -21,7 +21,6 @@ export interface AssetFormData {
   unitId: number;
   name: string;
   model: string;
-  image: string;
   specifications: AssetSpecifications;
 }
 

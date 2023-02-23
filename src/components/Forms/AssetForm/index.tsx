@@ -1,7 +1,9 @@
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, InputNumber, Typography } from "antd";
 import { AssetFormData } from "../../../requests/Asset";
 import { CompanySelect } from "../../Selects/CompanySelect";
 import { UnitSelect } from "../../Selects/UnitSelect";
+
+const { Text } = Typography;
 
 interface AssetFormProps {
   loading: boolean;
@@ -39,6 +41,19 @@ export const AssetForm = ({
         rules={[{ required: true, message: "Campo obrigatório" }]}
       >
         <Input />
+      </Form.Item>
+      <Text type="secondary">Especificações</Text>
+      <Form.Item
+        label="Temperatura máxima (°C)"
+        name={["specifications", "maxTemp"]}
+      >
+        <InputNumber type="number" />
+      </Form.Item>
+      <Form.Item label="Potência (kWh)" name={["specifications", "power"]}>
+        <InputNumber type="number" />
+      </Form.Item>
+      <Form.Item label="RPM" name={["specifications", "rpm"]}>
+        <InputNumber type="number" />
       </Form.Item>
       <Form.Item
         label="Empresa"
