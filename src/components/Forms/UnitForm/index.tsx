@@ -1,5 +1,6 @@
 import { Button, Form, Input } from "antd";
 import { UnitFormData } from "../../../requests/Unit";
+import { CompanySelect } from "../../Selects/CompanySelect";
 import "./index.css";
 
 interface UnitFormProps {
@@ -13,6 +14,8 @@ export const UnitForm = ({
   saveUnit,
   initialValues,
 }: UnitFormProps) => {
+  const [form] = Form.useForm<UnitFormData>();
+
   return (
     <Form
       onFinish={(values) => {
@@ -20,6 +23,7 @@ export const UnitForm = ({
       }}
       className="unit-form"
       initialValues={initialValues}
+      form={form}
     >
       <Form.Item
         label="Nome"
@@ -27,6 +31,15 @@ export const UnitForm = ({
         rules={[{ required: true, message: "Campo obrigatório" }]}
       >
         <Input />
+      </Form.Item>
+      <Form.Item
+        label="Empresa"
+        name="companyId"
+        rules={[{ required: true, message: "Campo obrigatório" }]}
+      >
+        <CompanySelect
+          onChange={(value) => form.setFieldsValue({ companyId: value })}
+        />
       </Form.Item>
       <Form.Item>
         <Button
