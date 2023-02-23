@@ -1,6 +1,5 @@
 import { Button, Form, Input } from "antd";
 import { CompanyFormData } from "../../../requests/Company";
-import "./index.css";
 
 interface CompanyFormProps {
   loading: boolean;
@@ -18,7 +17,7 @@ export const CompanyForm = ({
       onFinish={(values) => {
         saveCompany(values);
       }}
-      className="company-form"
+      className="form"
       initialValues={initialValues}
       layout="vertical"
     >
@@ -33,7 +32,7 @@ export const CompanyForm = ({
         <Button
           type="primary"
           htmlType="submit"
-          className="company-form-button"
+          className="form-submit-button"
           loading={loading}
         >
           Salvar

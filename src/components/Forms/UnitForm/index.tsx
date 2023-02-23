@@ -1,7 +1,6 @@
 import { Button, Form, Input } from "antd";
 import { UnitFormData } from "../../../requests/Unit";
 import { CompanySelect } from "../../Selects/CompanySelect";
-import "./index.css";
 
 interface UnitFormProps {
   loading: boolean;
@@ -21,10 +20,10 @@ export const UnitForm = ({
       onFinish={(values) => {
         saveUnit(values);
       }}
-      className="unit-form"
+      className="form"
       initialValues={initialValues}
-      form={form}
       layout="vertical"
+      form={form}
     >
       <Form.Item
         label="Nome"
@@ -47,7 +46,7 @@ export const UnitForm = ({
         <Button
           type="primary"
           htmlType="submit"
-          className="unit-form-button"
+          className="form-submit-button"
           loading={loading}
         >
           Salvar
