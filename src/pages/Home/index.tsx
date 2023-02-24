@@ -1,8 +1,9 @@
-import { Card, Col, Row, Spin, Statistic } from "antd";
+import { Row, Spin } from "antd";
 import { useCallback, useEffect, useState } from "react";
-import { AssetStatusCount } from "../../components/AssetStatusCount";
 import { useMessage } from "../../contexts/message";
-import { Asset, AssetStatus, getAssets } from "../../requests/Asset";
+import { Asset, getAssets } from "../../requests/Asset";
+import { AssetsIndicators } from "./AssetsIndicators";
+import { HealthScoreChart } from "./HealthScoreChart";
 
 export const Home = () => {
   const [loading, setLoading] = useState(true);
@@ -35,40 +36,10 @@ export const Home = () => {
 
   if (assets) {
     return (
-      <Row gutter={[24, 24]}>
-        <Col xs={12} md={6}>
-          <Card>
-            <Statistic title="Total de ativos" value={assets.length} />
-          </Card>
-        </Col>
-        <Col xs={12} md={6}>
-          <AssetStatusCount
-            count={
-              assets.filter((asset) => asset.status === AssetStatus.inOperation)
-                .length
-            }
-            status={AssetStatus.inOperation}
-          />
-        </Col>
-        <Col xs={12} md={6}>
-          <AssetStatusCount
-            count={
-              assets.filter((asset) => asset.status === AssetStatus.inDowntime)
-                .length
-            }
-            status={AssetStatus.inDowntime}
-          />
-        </Col>
-        <Col xs={12} md={6}>
-          <AssetStatusCount
-            count={
-              assets.filter((asset) => asset.status === AssetStatus.inAlert)
-                .length
-            }
-            status={AssetStatus.inAlert}
-          />
-        </Col>
-      </Row>
+      <>
+        <AssetsIndicators assets={assets} />
+        <HealthScoreChart assets={assets} />
+      </>
     );
   }
 
