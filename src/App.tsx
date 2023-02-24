@@ -1,8 +1,8 @@
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Link } from "react-router-dom";
 import { Layout } from "antd";
 import { MessageProvider } from "./contexts/message";
 import { HeaderMenu } from "./components/HeaderMenu";
-import { Router } from "./routes";
+import { routePaths, Router } from "./routes";
 import LogoTractian from "./assets/logo-tractian.svg";
 import "antd/dist/reset.css";
 import "./App.css";
@@ -14,7 +14,9 @@ function App() {
     <BrowserRouter>
       <Layout className="container">
         <Header className="header">
-          <img src={LogoTractian} alt="Tractian" className="header-logo" />
+          <Link to={routePaths.home}>
+            <img src={LogoTractian} alt="Tractian" className="header-logo" />
+          </Link>
           <HeaderMenu />
         </Header>
         <Content className="content">
