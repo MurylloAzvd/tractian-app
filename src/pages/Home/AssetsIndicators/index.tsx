@@ -1,6 +1,7 @@
 import { Card, Col, Row, Statistic } from "antd";
 import { AssetStatusCount } from "../../../components/AssetStatusCount";
 import { Asset, AssetStatus } from "../../../requests/Asset";
+import "./index.css";
 
 interface AssetsIndicatorsProps {
   assets: Asset[];
@@ -8,7 +9,7 @@ interface AssetsIndicatorsProps {
 
 export const AssetsIndicators = ({ assets }: AssetsIndicatorsProps) => {
   return (
-    <Row gutter={[24, 24]} style={{ marginBottom: "24px" }}>
+    <Row gutter={[24, 24]} className="assets-indicators">
       <Col xs={12} md={6}>
         <Card>
           <Statistic title="Total de ativos" value={assets.length} />

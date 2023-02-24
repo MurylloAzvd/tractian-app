@@ -49,10 +49,17 @@ export interface HealthHistoryRecord {
   timestamp: string;
 }
 
+export interface AssetsParams {
+  companyId?: number;
+  unitId?: number;
+}
+
 const basePath = "/assets";
 
-export const getAssets = async () => {
-  const response = await api.get<Asset[]>(basePath);
+export const getAssets = async (params?: AssetsParams) => {
+  const response = await api.get<Asset[]>(basePath, {
+    params,
+  });
   return response.data;
 };
 

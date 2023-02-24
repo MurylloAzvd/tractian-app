@@ -5,10 +5,15 @@ import { Company, getCompanies } from "../../../requests/Company";
 
 interface CompanySelectProps {
   onChange: (value: number) => void;
-  value: number;
+  value?: number;
+  allOption?: boolean;
 }
 
-export const CompanySelect = ({ onChange, value }: CompanySelectProps) => {
+export const CompanySelect = ({
+  onChange,
+  value,
+  allOption,
+}: CompanySelectProps) => {
   const [loading, setLoading] = useState(true);
   const [companies, setCompanies] = useState<Company[]>([]);
   const { message } = useMessage();
@@ -37,9 +42,14 @@ export const CompanySelect = ({ onChange, value }: CompanySelectProps) => {
   return (
     <Select
       value={loading ? undefined : value}
-      options={options}
+      options={[
+        ...options,
+        ...(allOption ? [{ label: "Todas", value: -1 }] : []),
+      ]}
       onChange={onChange}
       loading={loading}
+      style={{ width: "100%" }}
+      defaultValue={allOption ? -1 : undefined}
     />
   );
 };

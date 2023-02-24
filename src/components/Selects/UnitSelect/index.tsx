@@ -5,10 +5,11 @@ import { getUnits, Unit } from "../../../requests/Unit";
 
 interface UnitSelectProps {
   onChange: (value: number) => void;
-  value: number;
+  value?: number;
+  allOption?: boolean;
 }
 
-export const UnitSelect = ({ onChange, value }: UnitSelectProps) => {
+export const UnitSelect = ({ onChange, value, allOption }: UnitSelectProps) => {
   const [loading, setLoading] = useState(true);
   const [units, setUnits] = useState<Unit[]>([]);
   const { message } = useMessage();
@@ -37,9 +38,14 @@ export const UnitSelect = ({ onChange, value }: UnitSelectProps) => {
   return (
     <Select
       value={loading ? undefined : value}
-      options={options}
+      options={[
+        ...options,
+        ...(allOption ? [{ label: "Todas", value: -1 }] : []),
+      ]}
       onChange={onChange}
       loading={loading}
+      style={{ width: "100%" }}
+      defaultValue={allOption ? -1 : undefined}
     />
   );
 };
